@@ -14,10 +14,12 @@ import { Storage } from '@capacitor/storage';
 import { Capacitor } from '@capacitor/core';
 
 
-const [photos, setPhotos] = useState <UserPhoto[]>([]);
+
 
 
 export function usePhotoGallery(){
+    
+    const [photos, setPhotos] = useState <UserPhoto[]>([]);
     const takePhoto = async () => {
         const cameraPhoto = await Camera.getPhoto({
             resultType: CameraResultType.Uri,
