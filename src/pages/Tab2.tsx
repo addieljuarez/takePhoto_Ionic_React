@@ -21,7 +21,8 @@ import {
   camera,
   trash,
   close
-} from 'ionicons/icons'
+} from 'ionicons/icons';
+const { photos, takePhoto } = usePhotoGallery();
 
 
 

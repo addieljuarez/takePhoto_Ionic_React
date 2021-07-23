@@ -6,12 +6,16 @@ import {
     CameraResultType,
     CameraSource,
     Photo,
-} from '@capacitor/camera'
+} from '@capacitor/camera';
+
 
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Storage } from '@capacitor/storage';
 import { Capacitor } from '@capacitor/core';
-import { async } from "q";
+
+
+const [photos, setPhotos] = useState <UserPhoto[]>([]);
+
 
 export function usePhotoGallery(){
     const takePhoto = async () => {
@@ -20,9 +24,28 @@ export function usePhotoGallery(){
             source: CameraSource.Camera,
             quality: 100,
         });
+
+        const fileName = new Date().getTime() + '.jpeg';
+        const newPhotos = [
+            {
+                filepath: fileName,
+                webviewPath: cameraPhoto.webPath,
+            },
+            ...photos
+        ]
+        setPhotos(newPhotos);
+
+        
     }
 
     return {
+        photos,
         takePhoto
     };
+}
+
+
+export interface UserPhoto{
+    filepath: string;
+    webviewPath?: string;
 }
